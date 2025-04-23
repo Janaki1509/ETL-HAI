@@ -7,6 +7,11 @@ import psycopg2
 def run_etl():
     df = extract_data()
     df_clean = transform_data(df)
+    
+    # Save the cleaned data as a CSV file
+    df_clean.to_csv("data/clean_data.csv", index=False)
+    print("[Main] Cleaned CSV file saved at: data/clean_data.csv")
+
     load_data(df_clean)
     verify_load("infection_data")
     
